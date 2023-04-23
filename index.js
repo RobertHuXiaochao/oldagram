@@ -44,8 +44,10 @@ const posts = [
 const main = document.querySelector("main");
 
 function renderPosts() {
+	let innerHtmlContent = "";
 	for (let i = 0; i < posts.length; i++) {
-		innerHtmlContent = `<div class="user-info">
+		innerHtmlContent += `<section>
+		<div class="user-info">
 					<img
 						class="post-avatar"
 						src=${posts[i].avatar}
@@ -77,23 +79,29 @@ function renderPosts() {
 					<p class="username-caption">
 						<span>${posts[i].username}</span> ${posts[i].comment}
 					</p>
-				</div>`;
-		const newSection = document.createElement("section");
-		main.append(newSection);
-		newSection.innerHTML += innerHtmlContent;
-		const heartEL = document.querySelector(`.${posts[i].class}`);
-		heartEL.addEventListener("click", function () {
-			posts[i].likes++;
-			const likeCountEl = document.querySelector(`.${posts[i].countclass}`);
-			likeCountEl.textContent = posts[i].likes + " likes";
-		});
+				</div>
+				</section>`;
+	}
+	return innerHtmlContent;
+}
+main.innerHTML = renderPosts();
 
+function addOneLike() {
+	for (let i = 0; i < posts.length; i++) {
+		const heartEl = document.querySelector(`.${posts[i].class}`);
+		const likesEl = document.querySelector(`.${posts[i].countclass}`);
+		function singleClickHeart() {
+			heartEl.addEventListener("click", function () {
+				posts[i].likes++;
+				likesEl.textContent = posts[i].likes + " likes";
+			});
+		}
+		singleClickHeart();
 		const postImg = document.querySelector(`.${posts[i].postclass}`);
 		postImg.addEventListener("dblclick", function () {
 			posts[i].likes++;
-			const likeCountEl = document.querySelector(`.${posts[i].countclass}`);
-			likeCountEl.textContent = posts[i].likes + " likes";
+			likesEl.textContent = posts[i].likes + " likes";
 		});
 	}
 }
-renderPosts();
+addOneLike();

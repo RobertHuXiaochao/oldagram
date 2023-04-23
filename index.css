@@ -69,6 +69,34 @@ main {
 /* post-image */
 .post-img {
 	width: 375px;
+	animation: shadow 1s linear 0s infinite alternate;
+}
+
+@keyframes shadow {
+	from {
+		box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.2),
+			-2px -2px 3px 0 rgba(0, 0, 0, 0.2);
+	}
+	to {
+		box-shadow: 4px 4px 6px 0 rgba(0, 0, 0, 0.8),
+			-4px -4px 6px 0 rgba(0, 0, 0, 0.8);
+	}
+}
+
+.post-img:hover,
+.post-img:focus {
+	animation: hovershadow 1s linear 0s infinite reverse;
+}
+
+@keyframes hovershadow {
+	from {
+		box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.2),
+			-2px -2px 3px 0 rgba(0, 0, 0, 0.2);
+	}
+	to {
+		box-shadow: 4px 4px 6px 0 rgba(0, 0, 0, 0.8),
+			-4px -4px 6px 0 rgba(0, 0, 0, 0.8);
+	}
 }
 
 /* body */
@@ -85,12 +113,7 @@ main {
 	width: 24px;
 	margin-right: 15px;
 	cursor: pointer;
-}
-
-.icons:hover,
-.icons:focus {
-	animation-name: rotate;
-	animation-duration: 2s;
+	animation: rotate 2s linear 0s infinite alternate;
 }
 
 @keyframes rotate {
@@ -98,7 +121,21 @@ main {
 		transform: rotate(0deg);
 	}
 	to {
-		transform: rotate(360deg);
+		transform: rotate(-180deg);
+	}
+}
+
+.icons:hover,
+.icons:focus {
+	animation: hoverrotate;
+}
+
+@keyframes hoverrotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(0deg);
 	}
 }
 
